@@ -5,17 +5,17 @@
         <TargetFramework>net472</TargetFramework>
         <Configurations>Debug;Release</Configurations>
 
-        <!--The folder where Game.dll is located. Set it only if the game is not installed in the default location, otherwise keep it empty-->
+        <!--Game.dll的目录. 默认不需要填，除非编译时没找到你的游戏目录，一般是 \Cities Skylines II\Cities2_Data\Managed -->
         <CustomManagedPath></CustomManagedPath>
 
-        <!--Path to the text file where PDX account data is stored which is required to publish the mod-->
-        <!--Keep it outside of project in order to not commit it or share accidentally-->
-        <!--The file should contain 2 lines:-->
-        <!--Your.PDX@Account.login-->
-        <!--Your-PDX-Account-Pa$$word-->
+        <!--存放 PDX 账号的文本文件， 在上传模组时需要-->
+        <!--将其放置在项目外部，以免意外提交或共享-->
+        <!--该文件应包含两行文本：-->
+        <!--$账号邮箱$-->
+        <!--$密码$-->
         <PDXAccountDataPath>$(USERPROFILE)\Desktop\pdx_account.txt</PDXAccountDataPath>
 
-        <!--The file where mod information which is required for publishing mod on PDX mods are stored-->
+        <!--用于在 PDX mods 上发布模组所需的模组信息 文件-->
         <PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
 
         <AdditionalFilesDirectory>Resources</AdditionalFilesDirectory>
@@ -25,7 +25,7 @@
         <FileVersion>1.0.0</FileVersion>
     </PropertyGroup>
     
-    <!--Imports must be after PropertyGroup block-->
+    <!--导入必须位于 PropertyGroup 块之后,一般不需要修改-->
     <Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props"/>
     <Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets"/>
 

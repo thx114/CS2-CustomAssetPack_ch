@@ -1,52 +1,77 @@
-## Custom Asset Pack
+﻿# 自定义资产包
+此存储库是 《都市天际线2》 创建自定义资产包的模板。
+它依赖于 资产管理器 Asset Packs Manager（以前称为 Asset Importer）mod 将资产加载到游戏中。
 
-This repository is a template for creating custom asset packs for Cities: Skylines II. It depends on the [Asset Packs Manager (Formerly Asset Importer)](https://github.com/kosch104/CS2-AssetPacksManager) mod to load the assets into the game.
+## 特征 
+- 支缩略图  
+- 支持本地化（ 使用国际化mod）  
+- 资产创建资源  
 
-## Features
-- Support for Thumbnails
-- Support for Localization (Using L18N Everywhere)
+Discord 频道: https://discord.gg/HTav7ARPs2
 
-## Resources for Asset Creation
-Check out the [Cities Skylines Modding Discord](https://discord.gg/UkKAfRqfCn) for guides, videos and other resources for aspiring asset creators. You can also ask for help there or share your progress and ask for feedback
+### 免責聲明
+非官方自定义资产 具有很强的实验性。  
+它们会在某个时候使您的游戏崩溃或抛出错误。  
+创建保存文件的冗余副本，并自行承担使用风险。  
+对自定义资产的测试并不多，我发布这个项目是为了从社区获得反馈。  
 
-## DISCLAIMER
+### 要求
+- 已安装模组工具链  
+- 成品资产 （.Prefab 和 .Prefab.cid 文件，以及资产图标）  
+---
+## 1. 创建资产
+这个过程被称为资产组装，因为我们使用现有的资源和道具，并将它们组合成新的资源。  
+我们可以添加组件来为资产添加功能。  
+您可以在 discord 服务器中找到有关资产创建的完整指南。  
 
-Unofficial Custom Assets are highly experimental. They WILL crash your game at some point or throw errors. Create redundant copies of your save files and use at your own risk. There has not been a lot of testing done on custom assets, and I'm publishing this project to get feedback from the community.
+简要步骤：
+1. 在《都市天际线2》中打开编辑器  
+2. 创建您的资产，完成后单击左上角的保存按钮  
+3. 您的资产现在可以在C:/Users/[USERNAME]/LocalAppData/Colossal Order/Cities Skylines II/StreamingAssets~  
+4. 复制 .Prefab 和.Prefab.cid 文件。文件名应与您在编辑器中选择的文件名相对应。这些是您将共享的文件。  
 
-## Requirements
-- Modding Toolchain Installed
-- Finished Assets (.Prefab and .Prefab.cid file, option Thumbnail files)
+## 2. 创建资产包
+1. **克隆存储库** 或 **基于此创建存储库**（ “使用此模板”绿色按钮 ）
+2. 在你的Windows资源管理器（文件浏览器）中打开仓库，并**运行 资产包创建工具.exe**。重命名你的项目。不包含空格或特殊字符并以 AssetPack 结尾的项目名称
+3. 用任何IDE（Visual Studio/ Rider）打开仓库sln文件 [VSCode不行]
+4. 如果您使用的是替代的 Cities Skylines II 安装路径，请在 CustomAssetPack.csproj 的\<CustomManagedPath\> 下输入该路径
+5. 将要添加的资产放入解决方案资源管理器中的“资源/资产”文件夹（允许使用子文件夹）中
+6. 编辑本地化文件 ``en-US.json``/``zh-HANS``。否则，他们将缺少本地化  
+7. 将缩略图添加到您的资产中。确保图标路径正确: ```coui://customassets/PackName/CarProp.png```
+8. 构建项目
+	- Rider 顶部的锤子
+	- Visual Studio 生成解决方案
 
-## Creating Assets
-The process is called asset assembly, because we use existing assets and props and combine them into new assets. We can add Components to add functionality to the assets. You can find a full guide for the asset creation in the discord server.
+## 3. 发布资产包
+要发布您的模组，您必须执行以下步骤：
 
-
-Short compilation of the steps:
-1. Open the Editor in Cities Skylines II
-2. Create your Asset and click the save button on the top left when you are done
-3. Your assets will now be found in `C:/Users/[USERNAME]/LocalAppData/Colossal Order/Cities Skylines II/StreamingAssets~`
-4. Copy the .Prefab and .Prefab.cid file. The file names should correspond to the ones you chose in the editor. These are the files you will be sharing.
-
-## Creating your Asset Pack
-
-1. Clone the [repository](https://github.com/kosch104/CS2-CustomAssetPack) OR Create a repository based on this ("Use this template", green button)
-2. Open the repository in your windows explorer (file browser) and execute the `AssetPackCreatorUtilities.exe`. There you can rename your project. Choose a project name that contains no spaces or special characters and ends in `AssetPack`
-3. Open the repository sln-file with any IDE (Visual Studio, Rider, but NOT Visual Studio Code, that doesn't work)
-4. If you are using an alternative Cities Skylines II installation path, enter it in the `CustomAssetPack.csproj`-file under `<CustomManagedPath>`
-5. Create a file called `pdx-account.txt` on your Desktop. Put your PDX Mods username in the first line, your password in the second line. This is required for the mod to be published under your name and will not be shared with anyone.
-6. Put the assets you want to add into the "Resources/assets" folder in the solution explorer (subfolders allowed)
-7. Edit the localization file "en-US.json" to include your assets. Otherwise, they will have missing localization
-8. Add thumbnails to your assets. Make sure the icon path is set like this `coui://customassets/PackName/CarProp.png`
-9. Click on the Build Symbol (Hammer in Rider) at the top to build your project. This will load the assets into your local mods folder
-
-## Publishing your Asset Pack
-
-To publish your mod you have to do the following steps:
-1. Open `Properties/PublishConfiguration.xml` in Editor
-2. Edit `<DisplayName>`, `<ShortDescription>`, `<LongDescription>` and `<Tag>`
-3. Replace the `thumbnail.png` file by the thumbnail for your Asset Pack
-4. In Visual Studio, navigate to "Publish" and select "Publish New Mod". In Rider you can just select "Publish New Mod" next to the green arrow and press the arrow to execute the Publish Configuration,
+1. 在编辑器中打开 ``Properties/PublishConfiguration.xml``
+2. 编辑 ``<DisplayName>`` ``<ShortDescription>`` ``<LongDescription>`` ``<Tag>``
+3. 替换缩略图 ``thumbnail.png``
+4. 创建一个在桌面上调用的文本文件 ``pdx_account.txt``。将您的 PDX Mods 用户名放在第一行，密码放在第二行。
+5. - 在 Visual Studio 中，右键项目 > 发布，然后选择“Publish New Mod”。
+   - 在 Rider 中，您只需选择绿色箭头旁边的“Publish New Mod”，然后按箭头即可执行 Publish Configuration，
 
 
-## Support and Contact
-To receive help and find other asset creators join the [Cities Skylines Modding Discord](https://discord.gg/UkKAfRqfCn). We have infrastructure with a knowledge base and a community of creators that can help you with your questions.
+## 4. 更新资产包：
+1. 在编辑器中打开 ``Properties/PublishConfiguration.xml``
+2. 编辑 ``<ModId>`` ``<ModVersion>`` ``<ChangeLog>``
+3. 到发布界面，切换模式到 Publish New Version, 然后发布
+---
+## 支持和联系
+Cities Skylines Modding Discord： https://discord.gg/HTav7ARPs2
+我们拥有具有知识库的基础设施和创作者社区，可以帮助您解决问题。
+
+也可以加入 CSLBBS 群或者我的粉丝群： 
+- CSLBBS: 625068970 
+- 粉丝群: 957444754 
+
+## 常见问题
+- Q: 构建模组然后本地加载后被加载2次
+  A: 这是正常的，发布后不会
+  
+- Q: 构建时提示缺少DLL文件，但实际能找到那些文件
+  A: 由于操作系统原因可能读取不了过长路径的文件，尝试使用win11
+  
+- Q: ``pdx_account.txt``未能找到
+  A: 确认你有开扩展名显示，文件名完全对应
